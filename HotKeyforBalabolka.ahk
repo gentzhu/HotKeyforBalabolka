@@ -17,11 +17,12 @@ else
 ~WheelUp::
     {MouseGetPos &xpos,&ypos
     if (5<xpos && xpos<400)
-        { ;MsgBox "x在范围内"
-            SendEvent "+{NumpadSub}"
+        { SetCapsLockState false
+           ; MsgBox "x在范围内"
+            SendEvent "^{Left}"
         }
     else
-        { ;MsgBox "x不在范围内"
+        { ; MsgBox "x不在范围内"
             Send "{WheelUp}"
         }
     }
@@ -29,7 +30,8 @@ else
 ~WheelDown::{
     MouseGetPos &xpos,&ypos
     if (5<xpos && xpos<400){
-        SendEvent "+{NumpadAdd}"
+        SetCapsLockState false
+        SendEvent "^{Right}"
         }
     else
         {Send "{WheelDown}"
