@@ -1,7 +1,7 @@
 #SingleInstance Force
 #Requires AutoHotkey v2.0
 CoordMode "Mouse","Screen"
-#HotIf thewin("ahk_exe balabolka.exe", "ahk_exe SumatraPDF.exe")
+/* #HotIf thewin("ahk_id 656796", "ahk_exe SumatraPDF.exe")
 thewin(WinTitle, WinTitle2) {   
 TTS_ID:=WinActive(WinTitle)
 PDF_ID:=WinActive(WinTitle2)
@@ -13,29 +13,32 @@ else
     { ;MsgBox false
         return false
     }    
-}
-~WheelUp::
+} */
+#HotIf WinActive("ahk_exe balabolka.exe")
+WheelUp::
     {MouseGetPos &xpos,&ypos
     if (5<xpos && xpos<400)
-        { SetCapsLockState false
-           ; MsgBox "x在范围内"
+        {  
+          ;  ControlSend "^{Left}",,"ahk_exe balabolka.exe"
+            ;WinActivate "ahk_exe balabolka.exe"
             SendEvent "^{Left}"
+            ;hwnd1:=WinGetTitle("A")
+            ;MsgBox hwnd1,,"T0.25"
         }
     else
-        { ; MsgBox "x不在范围内"
-            Send "{WheelUp}"
+        { ; MsgBox "x不在范围内",,"T1"
+           Send "{WheelUp}"
         }
     }
 
-~WheelDown::{
+WheelDown::{
     MouseGetPos &xpos,&ypos
     if (5<xpos && xpos<400){
-        SetCapsLockState false
+        ;ControlSend "^{Right}",,"ahk_exe balabolka.exe"
         SendEvent "^{Right}"
         }
     else
         {Send "{WheelDown}"
         }
     }
-
 #HotIf
