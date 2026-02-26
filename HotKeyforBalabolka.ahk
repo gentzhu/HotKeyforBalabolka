@@ -1,36 +1,26 @@
-﻿#Requires Autohotkey v2.0
-#SingleInstance
-
-CoordMode "Mouse","Window"
+#SingleInstance Force
+#Requires AutoHotkey v2.0 
 #HotIf WinActive("ahk_exe balabolka.exe")
+
+
 WheelUp::{
-    MouseGetPos &xpos,&ypos
-    if (xpos<400){
-        SendKey("{^up}",ID)
-        }
-               
-    else
-        {Send "{WheelUp}"
-        }
-
-    }
-
-
+	CoordMode "Mouse","Window"
+	MouseGetPos &xpos,&ypos
+	if (xpos<451){
+		ControlFocus "TPlusMemo2"
+		ControlSend "{Esc}{^up}","TPlusMemo2"
+	}else{	
+		Send "{WheelUp}"
+	}
+}
 WheelDown::{
-    MouseGetPos &xpos,&ypos
-    if (xpos<400){
-        SendKey("{^down}",ID)
-        }
-    else
-        {Send "{WheelDown}"
-        }
-    }
-ID:=WinGetID("ahk_exe balabolka.exe")
-SendKey(Key, hWnd){
-	VK := GetKeyVK(Key),SC := GetKeySC(Key)
-		DllCall("keybd_event", "UChar", VK, "UChar", SC, "UInt", 0, "UPtr", 0)
-		Sleep 500
-		DllCall("keybd_event", "UChar", VK, "UChar", SC, "UInt", 2, "UPtr", 0)
+	CoordMode "Mouse","Window"
+	MouseGetPos &xpos,&ypos
+	if (xpos<451){
+		ControlFocus "TPlusMemo2"
+		ControlSend "{Esc}{^Down}","TPlusMemo2"
+	}else{	
+		send "{WheelDown}"
+	}
 }
 
-F4::ExitApp
