@@ -1,20 +1,34 @@
 #SingleInstance Force
-#Requires AutoHotkey v2.0
-#Include ".\clipboardorocr.ahk"
+#Requires AutoHotkey v2.0 
+;MonitorCount := MonitorGetCount()
+;If (MonitorCount=2)
+    VirtualScreenWidth:=SysGet(78)-22
 
-F2::{
-clipboardorocr()
-If  not WinExist("ahk_exe balabolka.exe")
-    {Run "D:\Program Files\Balabolka\balabolka.exe"
-    WinWaitActive("ahk_exe balabolka.exe")
-    Send  A_Clipboard
+
+CoordMode "Mouse","Screen"
+WheelUp::{
+	MouseGetPos &xpos,&ypos
+	if (xpos>VirtualScreenWidth){
+		Send "{Volume_Up}"
+	} 
+    if (xpos = 0){	
+       If WinActive("ahk_exe chrome.exe")
+        Send "{Left}"
+	}
+    else {
+        Send "{WheelUp}"
+    }
 }
-else {
-    WinActivate("ahk_exe balabolka.exe")
-    WinWaitActive("ahk_exe balabolka.exe")
-    Send "^{F4}"
-    Send "N"
-    Send  A_Clipboard
-}
-Send "{F5}"
+WheelDown::{
+	MouseGetPos &xpos,&ypos
+	if (xpos>VirtualScreenWidth){
+        Send "{Volume_Down}"
+			}
+    if (xpos = 0){
+        If WinActive("ahk_exe chrome.exe")
+        Send "{Right}"
+	} 
+    else { 
+        Send "{WheelDown}"
+    }
 }
