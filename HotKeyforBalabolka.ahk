@@ -17,22 +17,24 @@ else
 ~WheelUp::
     {MouseGetPos &xpos,&ypos
     if (5<xpos && xpos<400)
-        {  ; MsgBox "x在范围内"
-            ControlSend "^{Left}",,"ahk_exe balabolka.exe"
+        { ;MsgBox "x在范围内"
+            SendEvent "^{up}"
         }
     else
-        { ; MsgBox "x不在范围内"
+        { ;MsgBox "x不在范围内"
             Send "{WheelUp}"
         }
     }
 
+
 ~WheelDown::{
     MouseGetPos &xpos,&ypos
     if (5<xpos && xpos<400){
-        ControlSend "^{Right}",,"ahk_exe balabolka.exe"
+        SendEvent "^{down}"
         }
     else
         {Send "{WheelDown}"
         }
     }
+
 #HotIf
